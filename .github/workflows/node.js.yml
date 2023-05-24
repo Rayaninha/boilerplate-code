@@ -16,10 +16,8 @@ jobs:
       name: dev
     steps:
     - name: Install
-      working-directory: ./boilerplace-backend
       run: yarn
     - name: lint
-      working-directory: ./boilerplace-backend
       run: yarn lint
    
       
