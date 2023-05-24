@@ -2,30 +2,19 @@
   "compilerOptions": {
     "target": "es5",
     "module": "commonjs",
-    "lib": [
-      "es2018",
-      "es2017",
-      "es2016"
-    ],
+    "rootDir": "./",
+    "baseUrl": "./src",
     "outDir": "./dist",
-    "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noImplicitReturns": false,
-    "strictNullChecks": false,
-    "types": [
-      "node",
-      "jest"
-    ],
+    "paths": {
+      "@modules/*": ["modules/*"],
+      "@config/*": ["config/*"],
+      "@shared/*": ["shared/*"]
+    },
     "esModuleInterop": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true
-  },
-  "include": [
-    "./src/"
-  ],
-  "exclude": [
-    "./dist/"
-  ]
+  }
 }

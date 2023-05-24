@@ -1,4 +1,3 @@
-import { TelegramProvider } from '../providers/telegramProvider/implementations';
 import signale from 'signale';
 
 export default class BaseCommand {
@@ -28,12 +27,12 @@ export default class BaseCommand {
   }
 
   handleException(ex: any): boolean {
-    const telegramProvider = new TelegramProvider();
+    // const telegramProvider = new TelegramProvider();
 
     signale.error(ex.stack);
     this.addError(ex.message);
 
-    telegramProvider.sendErrorsGroupWatch([ex.message]);
+    // telegramProvider.sendErrorsGroupWatch([ex.message]);
 
     return false;
   }
