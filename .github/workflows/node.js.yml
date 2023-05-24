@@ -26,23 +26,7 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-    - name: Cache dependencies
-      uses: actions/cache@v1
-      id: yarn-cache
-      with:
-        path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-        key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-yarn-
-          
-    - name: Install Dependencies (from network)
-      run: |
-       yarn policies set-version
-       yarn install --frozen-lockfile --ignore-optional
-    - name: Install Dependencies (from cache)
-      run: |
-       yarn policies set-version
-       yarn install --frozen-lockfile --ignore-optional --offline
+    - run: yarn
     - run: yarn test
     - run: yarn lint
     - run: yarn build
