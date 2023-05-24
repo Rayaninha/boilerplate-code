@@ -16,8 +16,12 @@ jobs:
       name: dev
     steps:
     - name: Install
-      run: yarn
+      run: |
+        cd ../
+        yarn
     - name: lint
-      run: yarn lint
+      run: |
+        cd ../
+        yarn lint
    
       
