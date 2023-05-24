@@ -7,6 +7,8 @@ let dbInstance: Db;
 class MongoDb {
   async connect(): Promise<any> {
     const mongoClient = await MongoClient.connect(`${process.env.MONGODB_URL}`);
+    
+    console.log(process.env.MONGODB_URL)
 
     const database = mongoClient.db(process.env.MONGODB_DATABASE);
 
