@@ -15,13 +15,12 @@ jobs:
     environment:
       name: dev
     steps:
+    - uses: actions/checkout@v1
     - name: Install
       run: |
-        cd ../
         yarn
     - name: lint
       run: |
-        cd ../
         yarn lint
    
       
