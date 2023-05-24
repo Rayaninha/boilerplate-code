@@ -12,15 +12,10 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    steps:
-    - run: yarn
-    
-  deploy-dev:
-    runs-on: ubuntu-latest
     environment:
       name: dev
-    needs: build
     steps:
+    - run: yarn
     - run: yarn lint
     - run: yarn test
       
