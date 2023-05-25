@@ -18,7 +18,7 @@ describe('[COMMAND] - CREATE USERS', () => {
     await db.dropDatabase()
   })
 
-  it('should ble able to create users', async () => {
+  test('should ble able to create users', async () => {
     jest.setTimeout(30000);
     const result = await createUsersCommand.execute({
       name: 'test user',
@@ -30,5 +30,17 @@ describe('[COMMAND] - CREATE USERS', () => {
     expect(result).toHaveProperty('_id')
     expect(result).toHaveProperty('email')
     expect(result).toHaveProperty('role')
+  })
+
+  test('should be not able create a duplicate user', async () => {
+    jest.setTimeout(30000);
+    const result = await createUsersCommand.execute({
+      name: 'test user',
+      email: 'test@example.com',
+      password: 'test-password',
+      role: 'resu'
+    })
+
+    expect(result).toBe(false)
   })
 })
