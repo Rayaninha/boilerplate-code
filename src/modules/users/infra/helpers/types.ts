@@ -8,7 +8,6 @@ export interface ICreateUsers {
   email: string;
   password: string;
   role: IRolesTypes;
-  brandIds?: ObjectId[];
 }
 
 export interface IFindUsersByEmail {
