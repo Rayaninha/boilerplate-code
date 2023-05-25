@@ -1,5 +1,5 @@
 {
-  "name": "aff-manager",
+  "name": "boilerplate-backend",
   "version": "1.0.0",
   "description": "affiliate manager",
   "main": "index.js",
@@ -7,9 +7,9 @@
   "license": "MIT",
   "scripts": {
     "build": "rm -rf ./dist && tsc",
-    "test": "NODE_ENV=test MONGODB_DATABASE=test jest --forceExit",
+    "test": "NODE_ENV=test MONGODB_DATABASE=test jest --runInBand --forceExit",
     "dev": "cp .env.development .env && NODE_ENV=development nodemon",
-    "start": "NODE_ENV=production node ./dist",
+    "start": "NODE_ENV=production yarn build && node ./dist/src",
     "lint": "ts-node-dev eslint --fix './src/**/*.ts' && prettier --write './src/**/*.ts'"
   },
   "devDependencies": {

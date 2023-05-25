@@ -9,6 +9,7 @@ describe('[COMMAND] - CREATE USERS', () => {
 
   beforeAll(async () => {
     const db = await MongoDb.getDb();
+    console.log(process.env.MONGODB_URL)
     createUsersCommand = new CreateUsersCommand(db);
   })
 
@@ -18,11 +19,11 @@ describe('[COMMAND] - CREATE USERS', () => {
   })
 
   it('should ble able to create users', async () => {
-    jest.setTimeout(30000)
+    jest.setTimeout(30000);
     const result = await createUsersCommand.execute({
       name: 'test user',
       email: 'test@example.com',
-      password: 'testpassword',
+      password: 'test-password',
       role: 'resu'
     })
 
