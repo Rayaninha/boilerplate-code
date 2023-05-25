@@ -6,7 +6,7 @@
   "author": "Darlysson Alves <darlysson.alves.dev@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "build": "rm -rf ./dist && tsc",
+    "build": "rm -rf ./dist && npx tsc",
     "test": "NODE_ENV=test MONGODB_DATABASE=test jest --runInBand --forceExit",
     "dev": "cp .env.development .env && NODE_ENV=development nodemon",
     "start": "NODE_ENV=production npm run build && node ./dist/src",
