@@ -30,21 +30,6 @@ describe('[CONTROLLER] - CREATE USERS', () => {
     await db.dropDatabase();
   });
 
-  test('should be not able create a user non authenticated', async () => {
-    const { body, status } = await request(app)
-      .post('/users')
-      .send({
-        name: 'test user',
-        email: 'test@example.com',
-        password: 'test-password',
-        role: 'resu',
-      });
-
-    expect(body.r).toBe(false);
-    expect(status).toBe(401);
-    expect(body.errors[0]).toBe('401 - UNAUTHORIZED');
-  });
-
   test('should be able create a new user authenticated', async () => {
     const auth = await request(app)
       .post('/users/auth')

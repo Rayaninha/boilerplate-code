@@ -9,7 +9,6 @@ describe('[COMMAND] - CREATE USERS', () => {
 
   beforeAll(async () => {
     const db = await MongoDb.getDb();
-    console.log(process.env.MONGODB_URL)
     createUsersCommand = new CreateUsersCommand(db);
   })
 
