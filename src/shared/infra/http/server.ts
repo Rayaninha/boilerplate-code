@@ -11,6 +11,7 @@ new App()
 
     app.listen(PORT, () => signale.star(`app on port ${PORT}`));
   })
-  .catch((err: Error) =>
-    signale.warn(`error to start app ${JSON.stringify(err)}`),
-  );
+  .catch((err: Error) => {
+    console.log(err);
+    signale.warn(`error to start app ${JSON.stringify(err)}`);
+  });
