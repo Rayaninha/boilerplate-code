@@ -15,14 +15,6 @@ export const DECODE = (str: string): string => {
   return result;
 };
 
-export const RANDOM_NUMBER_BETWEEN_TWO_NUMBERS = (min: number, max: number) => {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-};
-
-export const RANDOM_FLOAT_BETWEEN_TWO_NUMBERS = (min: number, max: number) => {
-  return Number((Math.random() * (min - max) + max).toFixed(2));
-};
-
 export const ACTIONS_TYPES = {
   NEW_USER_CREATED: 'NEW_USER_CREATED',
   USER_LOGIN: 'USER_LOGIN',
