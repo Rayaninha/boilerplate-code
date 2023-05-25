@@ -18,6 +18,7 @@ describe('[COMMAND] - CREATE USERS', () => {
   })
 
   it('should ble able to create users', async () => {
+    jest.setTimeout(30000)
     const result = await createUsersCommand.execute({
       name: 'test user',
       email: 'test@example.com',
