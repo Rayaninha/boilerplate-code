@@ -50,7 +50,6 @@ jobs:
           heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
           heroku_app_name: "boilerplate-backend-stage"
           heroku_email: "darlysson.alves.dev@gmail.com"
-          remote_branch: "main"
     
   
   deploy-prod:
@@ -70,7 +69,6 @@ jobs:
           heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
           heroku_app_name: "boilerplate-backend-prod"
           heroku_email: "darlysson.alves.dev@gmail.com"
-          remote_branch: "main"
       
  
     
