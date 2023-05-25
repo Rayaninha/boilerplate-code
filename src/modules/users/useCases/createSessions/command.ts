@@ -6,6 +6,7 @@ import { TokensRepositories } from '../../infra/database/tokens/repositories';
 import { UsersRepositories } from '../../infra/database/repositories';
 import { compare } from 'bcryptjs';
 import { sign } from 'jsonwebtoken';
+import { UsersEntities } from 'modules/users/infra/database/entities';
 
 interface IRequest {
   email: string;
@@ -29,7 +30,7 @@ export class CreateSessionsCommand extends BaseCommand {
     this.dateProvider = new DateProvider();
   }
 
-  async execute({ email, password }: IRequest) {
+  async execute({ email, password }: IRequest): Promise<boolean | { user: UsersEntities, token: string, refreshToken: string }> {
     try {
       const user = await this.usersRepositories.findUserByEmail({ email });
 
