@@ -41,21 +41,21 @@ export const ERRORS = {
     code: 401,
     json: {
       r: false,
-      errors: ['401 - UNAUTHORIZED'],
+      errors: ['NÃO AUTORIZADO.'],
     },
   },
   FORBIDDEN: {
     code: 403,
     json: {
       r: false,
-      errors: ['403 - FORBIDDEN'],
+      errors: ['OPS... ACHO QUE VOCÊ ESTÁ NO LUGAR ERRADO.'],
     },
   },
   EXPIRED_TOKEN: {
     code: 401,
     json: {
       r: false,
-      errors: ['401 - TOKEN_EXPIRED'],
+      errors: ['TOKEN EXPIRADO.'],
     },
   },
 };
