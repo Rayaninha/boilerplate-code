@@ -38,7 +38,7 @@ jobs:
     needs: prepare-tests
     environment:
       name: dev
-      url: ${{ secrets.APP_URL }}
+      url: https://stage.app.com
     env:
       MONGODB_URL: ${{ secrets.MONGODB_URL }}
       MONGODB_DATABASE: ${{ secrets.MONGODB_DATABASE }}
@@ -57,7 +57,7 @@ jobs:
     needs: deploy-stage
     environment:
       name: prod
-      url: ${{ secrets.APP_URL }}
+      url: https://api.app.com
     env:
       MONGODB_URL: ${{ secrets.MONGODB_URL }}
       MONGODB_DATABASE: ${{ secrets.MONGODB_DATABASE }}
