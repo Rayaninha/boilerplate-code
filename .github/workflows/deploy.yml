@@ -38,7 +38,7 @@ jobs:
     needs: prepare-tests
     environment:
       name: dev
-      url: https://stage.boilerplatebackend.com
+      url: ${{ secrets.APP_URL }}
     env:
       MONGODB_URL: ${{ secrets.MONGODB_URL }}
       MONGODB_DATABASE: ${{ secrets.MONGODB_DATABASE }}
@@ -57,7 +57,7 @@ jobs:
     needs: deploy-stage
     environment:
       name: prod
-      url: https://api.boilerplatebackend.com
+      url: ${{ secrets.APP_URL }}
     env:
       MONGODB_URL: ${{ secrets.MONGODB_URL }}
       MONGODB_DATABASE: ${{ secrets.MONGODB_DATABASE }}
