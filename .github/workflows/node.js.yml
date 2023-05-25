@@ -32,9 +32,6 @@ jobs:
     - name: tests
       run: |
         yarn test
-    - name: start
-      run: |
-        yarn start
         
   deploy-stage:
     runs-on: ubuntu-latest
