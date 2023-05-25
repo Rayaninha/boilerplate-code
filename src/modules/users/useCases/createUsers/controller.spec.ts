@@ -45,8 +45,9 @@ describe('[CONTROLLER] - CREATE USERS', () => {
         email: 'test@example.com',
         password: 'test-password',
         role: 'resu',
-      }).set({
-        Authorization: `Bearer ${auth.body.data.token}`
+      })
+      .set({
+        Authorization: `Bearer ${auth.body.data.token}`,
       });
 
     expect(user.body.r).toBe(true);

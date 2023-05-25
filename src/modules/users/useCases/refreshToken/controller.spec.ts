@@ -44,7 +44,6 @@ describe('[CONTROLLER] - REFRESH TOKEN', () => {
         lastToken: auth.body.data.refreshToken,
       });
 
-
     expect(refresh.body.r).toBe(true);
     expect(refresh.body.data).toHaveProperty('token');
     expect(refresh.body.data).toHaveProperty('refreshToken');
@@ -58,6 +57,8 @@ describe('[CONTROLLER] - REFRESH TOKEN', () => {
       });
 
     expect(refresh.body.r).toBe(false);
-    expect(refresh.body.errors[0]).toBe('token não encontrado, por favor, logue novamente.');
+    expect(refresh.body.errors[0]).toBe(
+      'token não encontrado, por favor, logue novamente.',
+    );
   });
 });

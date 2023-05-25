@@ -41,8 +41,8 @@ describe('[CONTROLLER] - USER GET ME', () => {
     const me = await request(app)
       .get('/users/me')
       .set({
-        Authorization: `Bearer ${auth.body.data.token}`
-      })
+        Authorization: `Bearer ${auth.body.data.token}`,
+      });
 
     expect(me.body.r).toBe(true);
     expect(me.body.data).toHaveProperty('user');

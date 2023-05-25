@@ -21,7 +21,12 @@ export class CreateUsersCommand extends BaseCommand {
     this.usersRepositories = new UsersRepositories(db);
   }
 
-  async execute({ name, email, password, role }: IRequest): Promise<UsersEntities | boolean> {
+  async execute({
+    name,
+    email,
+    password,
+    role,
+  }: IRequest): Promise<UsersEntities | boolean> {
     try {
       const checkIfUserAlreadyExists = await this.usersRepositories.findUserByEmail(
         { email },

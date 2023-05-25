@@ -30,7 +30,12 @@ export class CreateSessionsCommand extends BaseCommand {
     this.dateProvider = new DateProvider();
   }
 
-  async execute({ email, password }: IRequest): Promise<boolean | { user: UsersEntities, token: string, refreshToken: string }> {
+  async execute({
+    email,
+    password,
+  }: IRequest): Promise<
+    boolean | { user: UsersEntities; token: string; refreshToken: string }
+  > {
     try {
       const user = await this.usersRepositories.findUserByEmail({ email });
 

@@ -52,8 +52,7 @@ describe('[CONTROLLER] - CREATE SESSIONS', () => {
         password: 'admin',
       });
 
-    
-    expect(auth.body.errors[0]).toBe('seus dados de entrada estão incorretos.')
+    expect(auth.body.errors[0]).toBe('seus dados de entrada estão incorretos.');
     expect(auth.body.r).toBe(false);
   });
 
@@ -65,8 +64,7 @@ describe('[CONTROLLER] - CREATE SESSIONS', () => {
         password: 'user',
       });
 
-    
-    expect(auth.body.errors[0]).toBe('seus dados de entrada estão incorretos.')
+    expect(auth.body.errors[0]).toBe('seus dados de entrada estão incorretos.');
     expect(auth.body.r).toBe(false);
   });
 });

@@ -1,7 +1,7 @@
-import '../../../../shared/infra/http/env'
+import '../../../../shared/infra/http/env';
 
-import MongoDb from "../../../../shared/infra/database/mongoDb";
-import { GetMeCommand } from "./command";
+import MongoDb from '../../../../shared/infra/database/mongoDb';
+import { GetMeCommand } from './command';
 import { CreateUsersCommand } from '../createUsers/command';
 import { UsersEntities } from '../../../../modules/users/infra/database/entities';
 
@@ -10,7 +10,6 @@ let createUsersCommand: CreateUsersCommand;
 let userId: string;
 
 describe('[COMMAND] - USER GET ME', () => {
-
   beforeAll(async () => {
     const db = await MongoDb.getDb();
     getMeCommand = new GetMeCommand(db);
@@ -21,22 +20,22 @@ describe('[COMMAND] - USER GET ME', () => {
       email: 'admin@example.com',
       password: 'password',
       role: 'toor',
-      name: 'admin'
-    })
+      name: 'admin',
+    });
 
-    if(result instanceof UsersEntities) {
-      userId = String(result._id)
+    if (result instanceof UsersEntities) {
+      userId = String(result._id);
     }
-  })
+  });
 
   afterAll(async () => {
     const db = await MongoDb.getDb();
-    await db.dropDatabase()
-  })
+    await db.dropDatabase();
+  });
 
   test('should able user get me', async () => {
     const result = await getMeCommand.execute({ _id: userId });
 
-    expect(result).toHaveProperty('user')
-  })
-})
+    expect(result).toHaveProperty('user');
+  });
+});

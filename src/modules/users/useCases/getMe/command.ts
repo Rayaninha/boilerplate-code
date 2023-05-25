@@ -25,8 +25,8 @@ export class GetMeCommand extends BaseCommand {
       delete user.role;
 
       return {
-        user
-      }
+        user,
+      };
     } catch (error) {
       this.handleException(error);
     }
