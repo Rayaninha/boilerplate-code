@@ -43,11 +43,6 @@ jobs:
       MONGODB_DATABASE: ${{ secrets.MONGODB_DATABASE }}
       PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
     steps:
-      - uses: actions/checkout@v1
-      - name: install
-        run: yarn
-      - name: build
-        run: yarn build
       - uses: actions/checkout@v2
       - uses: akhileshns/heroku-deploy@v3.12.14 
         with:
