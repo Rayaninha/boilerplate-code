@@ -20,13 +20,42 @@ jobs:
       PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
     steps:
     - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
+    - uses: akhileshns/heroku-deploy@v3.12.14 # This is the action
     - name: Install
       run: |
         yarn
     - name: lint
       run: |
         yarn lint
+    - name: build
+      run: |
+        yarn build
     - name: tests
       run: |
         yarn test
+    - name: start
+      run: |
+        yarn start
+        
+  deploy-stage:
+    runs-on: ubuntu-latest
+    needs: build
+    environment:
+      name: dev
+    env:
+      MONGODB_URL: ${{ secrets.MONGODB_URL }}
+      MONGODB_DATABASE: ${{ secrets.MONGODB_DATABASE }}
+      PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+    steps:
+      - uses: actions/checkout@v2
+      - uses: akhileshns/heroku-deploy@v3.12.14 
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "boilerplate-backend-stage"
+          heroku_email: "darlysson.alves.dev@gmail.com"
+          remote_branch: "main"
+      
+ 
+    
       
