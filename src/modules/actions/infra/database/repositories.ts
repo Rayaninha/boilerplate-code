@@ -16,12 +16,14 @@ export class ActionsRepositories implements IActionsRepositories {
 
   async create({
     userId,
+    petId,
     action,
     request,
     response,
   }: ICreateActionsRequest): Promise<ActionsEntities> {
     const actions = new ActionsEntities({
       userId,
+      petId,
       action,
       request,
       response,

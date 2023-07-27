@@ -3,6 +3,7 @@ import { ObjectId } from 'mongodb';
 
 export interface ICreateActionsRequest {
   userId?: ObjectId;
+  petId?: ObjectId;
   action: string;
   request: any;
   response: any;

@@ -16,6 +16,7 @@ export class UsersRoutes {
     const { handle: refreshToken } = new RefresnTokenController(db);
     const { handle: getMe } = new GetMeController(db);
 
+    // localhost:3000/users/
     routes.post(
       '/',
       SchemaValidator(createUsers.schema),
@@ -23,6 +24,7 @@ export class UsersRoutes {
       createUsers.fn,
     );
 
+    // localhost:3000/users/me
     routes.get(
       '/me',
       SchemaValidator(getMe.schema),
@@ -30,12 +32,14 @@ export class UsersRoutes {
       getMe.fn,
     );
 
+    // localhost:3000/users/auth
     routes.post(
       '/auth',
       SchemaValidator(createSessions.schema),
       createSessions.fn,
     );
 
+    // localhost:3000/users/refresh
     routes.post(
       '/refresh',
       SchemaValidator(refreshToken.schema),

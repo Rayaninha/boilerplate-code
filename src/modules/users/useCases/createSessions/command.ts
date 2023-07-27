@@ -12,7 +12,7 @@ interface IRequest {
   email: string;
   password: string;
 }
-
+// (login/sessão)
 export class CreateSessionsCommand extends BaseCommand {
   usersRepositories: UsersRepositories;
 

@@ -7,11 +7,12 @@ import BaseController, {
 } from '../../../../shared/commons/BaseController';
 import { Request, Response } from 'express';
 
-import { GetMeCommand as Command } from './command';
+import { CreatePetsCommand as Command } from './command';
 import { CreateActionsCommand } from '../../../actions/useCases/createActions/command';
 import { Db } from 'mongodb';
+import Joi from 'joi';
 
-export class GetMeController extends BaseController {
+export class CreatePetsController extends BaseController {
   db: Db;
 
   createActionsCommand: CreateActionsCommand;
@@ -27,22 +28,32 @@ export class GetMeController extends BaseController {
   get handle(): ControllerMethodType {
     return {
       auth: {
-        // roles: [],
-        roles: [ROLES_TYPES.ROOT, ROLES_TYPES.MANAGER, ROLES_TYPES.USER],
+        roles: [],
       },
-      schema: {},
+      schema: {
+        body: Joi.object({
+          name: Joi.string().required(),
+          age: Joi.number().integer().required(),
+        }),
+      },
       fn: async (req: Request, res: Response): Promise<unknown> => {
         try {
-          const { _id } = req.user;
+          const { name, age } = req.body;
+          // const { _id } = req.user; // first test
+          const userId = req.user?._id;
 
           const command = new Command(this.db);
 
-          const result = await command.execute({ _id });
+          const result = await command.execute({
+            name,
+            age,
+            userId
+          });
 
           if (command.isValid()) {
             await this.createActionsCommand.execute({
-              userId: _id,
-              action: ACTIONS_TYPES.USER_GET_ME,
+              // petId: _id, // first test
+              action: ACTIONS_TYPES.NEW_PET_CREATED,
               request: req,
               response: result,
             });
@@ -51,8 +62,8 @@ export class GetMeController extends BaseController {
           }
 
           await this.createActionsCommand.execute({
-            userId: _id,
-            action: ACTIONS_TYPES.USER_GET_ME,
+            // petId: _id, // first test
+            action: ACTIONS_TYPES.NEW_PET_CREATED,
             request: req,
             response: command.errors,
           });

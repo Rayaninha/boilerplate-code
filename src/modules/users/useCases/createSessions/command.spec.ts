@@ -32,6 +32,7 @@ describe('[COMMAND] - CREATE SESSIONS', () => {
       password: 'password',
     });
 
+    // verificando se a propriedade fornecida na referencia keypath existe para um objeto.
     expect(result).toHaveProperty('user');
     expect(result).toHaveProperty('token');
     expect(result).toHaveProperty('refreshToken');
@@ -39,17 +40,18 @@ describe('[COMMAND] - CREATE SESSIONS', () => {
 
   test('should be not able create a new session with invalid email', async () => {
     const result = await createSessionsCommand.execute({
-      email: 'user@example.com',
+      email: 'user@example.com', // invalid email
       password: 'password',
     });
 
+    // valida as prorpiedades fornecidas do objeto result
     expect(result).toBe(false);
   });
 
   test('should be not able create a new session with invalid password', async () => {
     const result = await createSessionsCommand.execute({
       email: 'admin@example.com',
-      password: 'admin',
+      password: 'admin', // invalid password
     });
 
     expect(result).toBe(false);
