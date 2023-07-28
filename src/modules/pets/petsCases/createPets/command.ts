@@ -24,14 +24,6 @@ export class CreatePetsCommand extends BaseCommand {
   userId,
   }: IRequest): Promise<PetsEntities | boolean> {
     try {
-      const checkIfPetAlreadyExists = await this.petsRepositories.findPetsByName(
-        { name },
-      );
-
-      if (checkIfPetAlreadyExists) {
-        return this.addError('artigo já registrado na plataforma.');
-      }
-
       const pet = await this.petsRepositories.createPets({
         name,
         age,

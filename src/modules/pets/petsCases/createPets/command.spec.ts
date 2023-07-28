@@ -19,8 +19,9 @@ describe('[COMMAND] - CREATE PETS', () => {
   test('rapaz, crinado um pet', async () => {
     jest.setTimeout(30000);
     const result = await createPetsCommand.execute({
-      name: 'test name',
-      age: 'test age',
+      name: 'name',
+      age: '5',
+      userId: '',
     })
 
     expect(result).toHaveProperty('_id');
@@ -31,8 +32,9 @@ describe('[COMMAND] - CREATE PETS', () => {
   test('rapaz, verificando a existencia de um outro pet', async () => {
     jest.setTimeout(30000);
     const result = await createPetsCommand.execute({
-      name: 'test name',
-      age: 'test age',
+      name: 'name',
+      age: '5',
+      userId: ''
     });
 
     expect(result).toBe(false);

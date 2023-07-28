@@ -17,8 +17,5 @@ export interface IFindPetById {
 
 export interface IPetsRepositories {
   createPets(payload: ICreatePets): Promise<PetsEntities>;
-  findPetsByName(
-    payload: IFindPetByName,
-  ): Promise<PetsEntities | undefined>;
   findArtcilesById({ petId }: IFindPetById): Promise<PetsEntities>;
 }

@@ -3,7 +3,6 @@ import {
   ICreatePets,
   IFindPetById,
   IPetsRepositories,
-  IFindPetByName,
 } from '../helpers/types';
 
 import { PetsEntities } from './entities';
@@ -19,9 +18,7 @@ export class PetsRepositories implements IPetsRepositories {
 
     this.petsDb = this.db.collection(collections.users);
   }
-  findArtcilesByName(payload: IFindPetByName): Promise<PetsEntities> {
-    throw new Error('Method not implemented.');
-  }
+
   findArtcilesById({ petId }: IFindPetById): Promise<PetsEntities> {
     throw new Error('Method not implemented.');
   }
@@ -29,13 +26,6 @@ export class PetsRepositories implements IPetsRepositories {
   async createPets(payload: ICreatePets): Promise<PetsEntities> {
     const pet = new PetsEntities({ ...payload });
     await this.petsDb.insertOne(pet);
-    return pet;
-  }
-
-  async findPetsByName({ name }: IFindPetByName): Promise<PetsEntities> {
-    const pet = ((await this.petsDb.findOne({
-      name,
-    })) as unknown) as PetsEntities;
     return pet;
   }
 
