@@ -29,7 +29,7 @@ export class CreateUsersController extends BaseController {
     return {
       auth: {
         roles: [],
-        // roles: [ROLES_TYPES.ROOT, ROLES_TYPES.MANAGER],
+        // roles: [ROLES_TYPES.ROOT, ROLES_TYPES.MANAGER, ROLES_TYPES.USER],
       },
       schema: {
         body: Joi.object({

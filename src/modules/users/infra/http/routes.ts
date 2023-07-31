@@ -46,6 +46,13 @@ export class UsersRoutes {
       refreshToken.fn,
     );
 
+    // localhost:3000/users/all
+    // routes.get(
+    //   '/all',
+    //   SchemaValidator(getAll.schema),
+    //   getAll.fn,
+    // );
+
     return routes;
   }
 }

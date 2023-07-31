@@ -43,7 +43,7 @@ describe('[CONTROLLER] - USER GET ME', () => {
       .set({
         Authorization: `Bearer ${auth.body.data.token}`,
       });
-
+      
     expect(me.body.r).toBe(true);
     expect(me.body.data).toHaveProperty('user');
   });

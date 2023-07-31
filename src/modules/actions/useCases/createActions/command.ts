@@ -5,6 +5,7 @@ import BaseCommand from '../../../../shared/commons/BaseCommand';
 
 export interface IRequest {
   userId?: string;
+  // petId?: string;
   action: string;
   request: any;
   response: any;

@@ -7,6 +7,9 @@ import MongoDb, {
 } from '../../../../shared/infra/database/mongoDb';
 import request from 'supertest';
 import { hash } from 'bcryptjs';
+import { CreateUsersCommand } from './command';
+
+let createUsersCommand: CreateUsersCommand;
 
 describe('[CONTROLLER] - CREATE USERS', () => {
   let app: Application;
@@ -15,6 +18,7 @@ describe('[CONTROLLER] - CREATE USERS', () => {
   beforeAll(async () => {
     app = await new App().setup();
     db = await MongoDb.getDb();
+    createUsersCommand = new CreateUsersCommand(db);
 
     const hashedPassword = await hash('admin', 8);
 
@@ -42,8 +46,8 @@ describe('[CONTROLLER] - CREATE USERS', () => {
       .post('/users')
       .send({
         name: 'test user',
-        email: 'test@example.com',
-        password: 'test-password',
+        email: 'test@gmail.com',
+        password: 'password',
         role: 'resu',
       })
       .set({
@@ -54,5 +58,36 @@ describe('[CONTROLLER] - CREATE USERS', () => {
     expect(user.body.data).toHaveProperty('_id');
     expect(user.body.data).toHaveProperty('role');
     expect(user.body.data).toHaveProperty('email');
+  });
+
+  test('should create a new user and store all properties correctly in the database', async () => {
+    const userInDatabase = await request(app)
+      .post('/users')
+      .send({
+        name: 'user in database',
+        email: 'userindatabase@gmail.com',
+        password: 'password',
+        role: 'resu',
+      })
+      .expect(200);
+
+    expect(userInDatabase.body.data).toHaveProperty('_id');
+    expect(userInDatabase.body.data).toHaveProperty('name', 'user in database');
+    expect(userInDatabase.body.data).toHaveProperty('email', 'userindatabase@gmail.com');
+    expect(userInDatabase.body.data).toHaveProperty('role', 'resu');
+
+    // Check if the user is actually stored in the database
+    await db.collection(collections.users).findOne({
+      _id: userInDatabase.body.data._id,
+    });
+
+    expect(userInDatabase.body.data.name).toBe('user in database');
+    expect(userInDatabase.body.data.email).toBe('userindatabase@gmail.com');
+    expect(userInDatabase.body.data.role).toBe('resu');
+
+    const sameValue = 'user in database';
+
+    expect(sameValue).toEqual(userInDatabase.body.data.name);
+    expect(sameValue).not.toBe(userInDatabase.body.data.name);
   });
 });

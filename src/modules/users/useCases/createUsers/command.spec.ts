@@ -29,7 +29,7 @@ describe('[COMMAND] - CREATE USERS', () => {
     expect(result).toHaveProperty('email');
     expect(result).toHaveProperty('role');
   });
-
+  
   test('should be not able create a duplicate user', async () => {
     jest.setTimeout(30000);
     const result = await createUsersCommand.execute({
@@ -42,3 +42,4 @@ describe('[COMMAND] - CREATE USERS', () => {
     expect(result).toBe(false);
   });
 });
+
