@@ -86,8 +86,9 @@ describe('[CONTROLLER] - CREATE USERS', () => {
     expect(userInDatabase.body.data.role).toBe('resu');
 
     const sameValue = 'user in database';
+    const notSameValue = 'test in database'
 
     expect(sameValue).toEqual(userInDatabase.body.data.name);
-    expect(sameValue).not.toBe(userInDatabase.body.data.name);
+    expect(notSameValue).not.toBe(userInDatabase.body.data.name);
   });
 });

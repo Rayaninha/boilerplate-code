@@ -18,6 +18,10 @@ export interface IFindUserById {
   userId: ObjectId;
 }
 
+export interface IDeleteUserById {
+  userId: ObjectId;
+}
+
 export interface ICreateRefreshTokenRequest {
   refreshToken: string;
   user: Partial<UsersEntities>;
@@ -53,4 +57,5 @@ export interface IUsersRepositories {
   ): Promise<UsersEntities | undefined>;
   findUserById({ userId }: IFindUserById): Promise<UsersEntities>;
   updateLastLoginUser({ userId }: IUpdateLastLoginRequest): Promise<void>;
+  deleteUserById({ userId }: IDeleteUserById): Promise<UsersEntities>;
 }

@@ -6,6 +6,8 @@ import { GetMeController } from '../../useCases/getMe/controller';
 import { RefresnTokenController } from '../../useCases/refreshToken/controller';
 import { Router } from 'express';
 import { SchemaValidator } from '../../../../shared/infra/http/middlewares/schemaValidator';
+import { DeleteUsersController } from '../../useCases/deleteUsers/controller';
+
 
 export class UsersRoutes {
   static getRoutes(db: Db): Router {
@@ -15,6 +17,7 @@ export class UsersRoutes {
     const { handle: createSessions } = new CreateSessionsController(db);
     const { handle: refreshToken } = new RefresnTokenController(db);
     const { handle: getMe } = new GetMeController(db);
+    const { handle: deleteUsers } = new DeleteUsersController(db);
 
     // localhost:3000/users/
     routes.post(
@@ -52,6 +55,14 @@ export class UsersRoutes {
     //   SchemaValidator(getAll.schema),
     //   getAll.fn,
     // );
+
+    // localhost:3000/users/delete
+    routes.delete(
+      '/delete',
+      SchemaValidator(deleteUsers.schema),
+      EnsureAuthentication(deleteUsers.auth),
+      deleteUsers.fn,
+    );    
 
     return routes;
   }

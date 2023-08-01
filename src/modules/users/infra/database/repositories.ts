@@ -5,6 +5,7 @@ import {
   IFindUsersByEmail,
   IUpdateLastLoginRequest,
   IUsersRepositories,
+  IDeleteUserById,
 } from '../helpers/types';
 
 import { UsersEntities } from './entities';
@@ -47,6 +48,19 @@ export class UsersRepositories implements IUsersRepositories {
     const user = ((await this.usersDb.findOne({
       _id: userId,
     })) as unknown) as UsersEntities;
+    return user;
+  }
+
+  async deleteUserById({ userId }: IDeleteUserById): Promise<UsersEntities> {
+    const user = ((await this.usersDb.findOne({ 
+      _id: userId,
+     })) as unknown) as UsersEntities;
+     
+    if (!user) {
+      throw new Error('User not found');
+    }
+
+    await this.usersDb.deleteOne({ _id: userId });
     return user;
   }
 }
