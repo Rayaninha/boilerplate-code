@@ -48,7 +48,7 @@ describe('[CONTROLLER] - CREATE SESSIONS', () => {
     const auth = await request(app)
       .post('/users/auth')
       .send({
-        email: 'user@example.com',
+        email: 'user@example.com', // invalid email
         password: 'admin',
       });
 
@@ -61,7 +61,7 @@ describe('[CONTROLLER] - CREATE SESSIONS', () => {
       .post('/users/auth')
       .send({
         email: 'admin@example.com',
-        password: 'user',
+        password: 'user', // invalid password
       });
 
     expect(auth.body.errors[0]).toBe('seus dados de entrada estão incorretos.');

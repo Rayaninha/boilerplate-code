@@ -4,15 +4,22 @@ import { DeleteUsersCommand as Command } from './command';
 import { Db } from 'mongodb';
 import Joi from 'joi';
 import {
+  ACTIONS_TYPES,
   ROLES_TYPES,
 } from '../../../../shared/commons/constants';
+import { CreateActionsCommand } from '../../../actions/useCases/createActions/command';
 
 export class DeleteUsersController extends BaseController {
   db: Db;
 
+  createActionsCommand: CreateActionsCommand;
+
   constructor(db: Db) {
     super();
+
     this.db = db;
+
+    this.createActionsCommand = new CreateActionsCommand(db);
   }
 
   get handle(): ControllerMethodType {
@@ -31,8 +38,22 @@ export class DeleteUsersController extends BaseController {
           const result = await command.execute({ _id });
 
           if (command.isValid()) {
-            return this.Ok(res, { message: 'Usuário excluído com sucesso.' });
+            await this.createActionsCommand.execute({
+              // userId: _id, // create first new user
+              action: ACTIONS_TYPES.DELETE_USER,
+              request: req,
+              response: result,
+            });
+
+            return this.Ok(res, result);
           }
+
+          await this.createActionsCommand.execute({
+            // userId: _id, // create first new user
+            action: ACTIONS_TYPES.DELETE_USER,
+            request: req,
+            response: command.errors,
+          });
 
           return this.Fail(res, result, command.errors);
         } catch (error) {

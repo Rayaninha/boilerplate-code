@@ -18,6 +18,10 @@ export interface IFindUserById {
   userId: ObjectId;
 }
 
+export interface IGetAllUsers {
+  // userId: ObjectId;
+}
+
 export interface IDeleteUserById {
   userId: ObjectId;
 }

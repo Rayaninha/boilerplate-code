@@ -3,13 +3,16 @@ import '../../../../shared/infra/http/env';
 import MongoDb from '../../../../shared/infra/database/mongoDb';
 import { CreateSessionsCommand } from './command';
 import { CreateUsersCommand } from '../createUsers/command';
+import { Db } from 'mongodb';
 
 let createSessionsCommand: CreateSessionsCommand;
 let createUsersCommand: CreateUsersCommand;
 
 describe('[COMMAND] - CREATE SESSIONS', () => {
+  let db: Db;
+
   beforeAll(async () => {
-    const db = await MongoDb.getDb();
+    db = await MongoDb.getDb();
     createSessionsCommand = new CreateSessionsCommand(db);
     createUsersCommand = new CreateUsersCommand(db);
 
@@ -22,7 +25,6 @@ describe('[COMMAND] - CREATE SESSIONS', () => {
   });
 
   afterAll(async () => {
-    const db = await MongoDb.getDb();
     await db.dropDatabase();
   });
 

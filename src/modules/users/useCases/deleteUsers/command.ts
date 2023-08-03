@@ -1,5 +1,3 @@
-// deleteUser/command.ts
-
 import BaseCommand from '../../../../shared/commons/BaseCommand';
 import { Db, ObjectId } from 'mongodb';
 import { UsersRepositories } from '../../infra/database/repositories';

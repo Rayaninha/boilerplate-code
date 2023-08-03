@@ -46,4 +46,15 @@ describe('[CONTROLLER] - DELETE USER', () => {
       
     expect(me.body.r).toBe(true);
   });
+
+  test('erro ao deletar o usuário', async () => {
+    const errorToken = await request(app)
+    .delete('/users/delete')
+    .set({
+      Authorization: `Bearer tokenquenaoexiste`,
+    });
+
+    expect(errorToken.body.errors[0]).toBe('TOKEN EXPIRADO.');
+    expect(errorToken.body.r).toBe(false);
+  });
 });

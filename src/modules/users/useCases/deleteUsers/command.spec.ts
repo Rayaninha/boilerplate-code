@@ -29,7 +29,7 @@ describe('[COMMAND] - DELETE USER', () => {
     if (createUser instanceof UsersEntities) {
       userId = String(createUser._id);
     }
-
+    
     // const getUser = await getMeCommand.execute({ _id: userId });
   });
 

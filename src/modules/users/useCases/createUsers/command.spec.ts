@@ -2,17 +2,24 @@ import '../../../../shared/infra/http/env';
 
 import MongoDb from '../../../../shared/infra/database/mongoDb';
 import { CreateUsersCommand } from './command';
+import { GetMeCommand } from '../getMe/command';
+import { UsersEntities } from '../../infra/database/entities';
+import { Db } from 'mongodb';
 
 let createUsersCommand: CreateUsersCommand;
+let getMeCommand: GetMeCommand;
+let userId: string;
 
 describe('[COMMAND] - CREATE USERS', () => {
+  let db: Db
+  
   beforeAll(async () => {
-    const db = await MongoDb.getDb();
+    db = await MongoDb.getDb();
     createUsersCommand = new CreateUsersCommand(db);
+    getMeCommand = new GetMeCommand(db);
   });
 
   afterAll(async () => {
-    const db = await MongoDb.getDb();
     await db.dropDatabase();
   });
 

@@ -47,4 +47,14 @@ describe('[CONTROLLER] - USER GET ME', () => {
     expect(me.body.r).toBe(true);
     expect(me.body.data).toHaveProperty('user');
   });
+
+  test('should not able user get me', async () => {
+    const me = await request(app)
+    .get('/users/me')
+    .set({
+      Authorization: `Bearer tokeninvalido`
+    })
+    
+    expect(me.body.errors[0]).toBe('TOKEN EXPIRADO.');
+  })
 });
