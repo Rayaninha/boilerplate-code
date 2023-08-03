@@ -4,6 +4,7 @@ import { Db } from 'mongodb';
 import MongoDb from '../database/mongoDb';
 import { UsersModules } from '../../../modules/users/infra/http/modules';
 import cors from 'cors';
+import { PetsModules } from '../../../modules/pets/infra/http/modules';
 
 export class App {
   app: Application;
@@ -27,6 +28,7 @@ export class App {
 
   modules(db: Db): void {
     UsersModules.configure(this.app, db);
+    PetsModules.configure(this.app, db)
   }
 
   async setup(): Promise<Application> {

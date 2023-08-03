@@ -34,6 +34,7 @@ export const collections = {
   users: 'users',
   tokens: 'tokens',
   actions: 'actions',
+  pets: 'pets',
 };
 
 export default MongoDb;
