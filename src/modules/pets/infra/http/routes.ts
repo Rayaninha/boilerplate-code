@@ -14,7 +14,7 @@ export class PetsRoutes {
     routes.post(
       '/',
       SchemaValidator(createPets.schema),
-      // EnsureAuthentication(createPets.auth),
+      EnsureAuthentication(createPets.auth),
       createPets.fn,
     );
 
