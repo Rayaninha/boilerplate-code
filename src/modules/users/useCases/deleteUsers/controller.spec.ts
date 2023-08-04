@@ -7,6 +7,7 @@ import MongoDb, {
 } from '../../../../shared/infra/database/mongoDb';
 import request from 'supertest';
 import { hash } from 'bcryptjs';
+import { DeleteUsersCommand } from './command';
 
 describe('[CONTROLLER] - DELETE USER', () => {
   let app: Application;
@@ -31,6 +32,13 @@ describe('[CONTROLLER] - DELETE USER', () => {
   });
 
   test('should able delete user', async () => {
+    jest.mock('./command', () => ({
+      DeleteUsersCommand: jest.fn().mockImplementation(() => ({
+        execute: async () => false,
+        isValid: () => true,
+      })),
+    }));
+    
     const auth = await request(app)
       .post('/users/auth')
       .send({
@@ -48,6 +56,15 @@ describe('[CONTROLLER] - DELETE USER', () => {
   });
 
   test('erro ao deletar o usuário', async () => {
+    // utilizar mock quando for preciso controlar o comportamento de dependências específicas de uma rota.
+    jest.mock('./command', () => ({
+      DeleteUsersCommand: jest.fn().mockImplementation(() => ({
+        execute: async () => false,
+        isValid: () => true,
+        errors: ['TOKEN EXPIRADO.'],
+      })),
+    }));
+
     const errorToken = await request(app)
     .delete('/users/delete')
     .set({

@@ -1,5 +1,6 @@
 import { BaseEntities } from '../../../../shared/commons/BaseEntities';
 import { IRolesTypes } from '../../../../shared/commons/BaseController';
+import { PetsEntities } from 'modules/pets/infra/database/entities';
 
 export class UsersEntities extends BaseEntities {
   name: string;

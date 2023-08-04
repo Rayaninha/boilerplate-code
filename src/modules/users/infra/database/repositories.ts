@@ -6,7 +6,7 @@ import {
   IUpdateLastLoginRequest,
   IUsersRepositories,
   IDeleteUserById,
-  // IGetAllUsers,
+  IGetAllUsers,
 } from '../helpers/types';
 
 import { UsersEntities } from './entities';
@@ -52,10 +52,10 @@ export class UsersRepositories implements IUsersRepositories {
     return user;
   }
 
-  // async getAllUsers({ userId }: IGetAllUsers): Promise<UsersEntities> {
-  //   const users = ((this.usersDb.find({})) as unknown) as UsersEntities;
-  //   return users;
-  // }
+  async getAllUsers({}: IGetAllUsers): Promise<UsersEntities> {
+    const users = ((this.usersDb.find({})) as unknown) as UsersEntities;
+    return users;
+  }
 
   async deleteUserById({ userId }: IDeleteUserById): Promise<UsersEntities> {
     const user = ((await this.usersDb.findOne({ 
