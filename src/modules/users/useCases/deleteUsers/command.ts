@@ -25,7 +25,9 @@ export class DeleteUsersCommand extends BaseCommand {
         return this.addError('User not found.');
       }
 
-      await this.usersRepositories.deleteUserById({ userId: new ObjectId(_id) });
+      await this.usersRepositories.deleteUserById({
+        userId: new ObjectId(_id),
+      });
       return true;
     } catch (error) {
       return this.handleException(error);

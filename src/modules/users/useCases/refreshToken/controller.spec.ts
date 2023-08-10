@@ -7,7 +7,6 @@ import MongoDb, {
 } from '../../../../shared/infra/database/mongoDb';
 import request from 'supertest';
 import { hash } from 'bcryptjs';
-import { RefreshTokenCommand } from './command';
 
 describe('[CONTROLLER] - REFRESH TOKEN', () => {
   let app: Application;
@@ -51,13 +50,6 @@ describe('[CONTROLLER] - REFRESH TOKEN', () => {
   });
 
   test('should be not able refresh a invalid token', async () => {
-    jest.mock('./command', () => ({
-      RefreshTokenCommand: jest.fn().mockImplementation(() => ({
-        execute: async () => false,
-        idValid: () => true,
-        errors: ['token não encontrado, por favor, logue novamente.']
-      }))
-    }))
     const refresh = await request(app)
       .post('/users/refresh')
       .send({

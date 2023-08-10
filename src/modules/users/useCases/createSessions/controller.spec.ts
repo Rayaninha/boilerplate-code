@@ -7,7 +7,6 @@ import MongoDb, {
 } from '../../../../shared/infra/database/mongoDb';
 import request from 'supertest';
 import { hash } from 'bcryptjs';
-import { CreateSessionsCommand } from './command';
 
 describe('[CONTROLLER] - CREATE SESSIONS', () => {
   let app: Application;
@@ -68,14 +67,4 @@ describe('[CONTROLLER] - CREATE SESSIONS', () => {
     expect(auth.body.errors[0]).toBe('seus dados de entrada estão incorretos.');
     expect(auth.body.r).toBe(false);
   });
-
-  test('should be not able create a new session with invalid data', async () => {
-    jest.mock('./command', () => ({
-      CreateSessionsCommand: jest.fn().mockImplementation(() => ({
-        execute: async () => false,
-        isValid: () => true,
-        errors: ['seus dados de entrada estão incorretos.'],
-      })),
-    }));
-  })
 });

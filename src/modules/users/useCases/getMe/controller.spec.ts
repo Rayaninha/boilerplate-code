@@ -7,7 +7,6 @@ import MongoDb, {
 } from '../../../../shared/infra/database/mongoDb';
 import request from 'supertest';
 import { hash } from 'bcryptjs';
-import { GetMeCommand } from './command';
 
 describe('[CONTROLLER] - USER GET ME', () => {
   let app: Application;
@@ -44,26 +43,17 @@ describe('[CONTROLLER] - USER GET ME', () => {
       .set({
         Authorization: `Bearer ${auth.body.data.token}`,
       });
-      
     expect(me.body.r).toBe(true);
     expect(me.body.data).toHaveProperty('user');
   });
 
   test('should not able user get me', async () => {
-    jest.mock('./command', () => ({
-      GetMeCommand: jest.fn().mockImplementation(() => ({
-        execute: async () => false,
-        isValid: () => true,
-        errors: ['TOKEN EXPIRADO.'],
-      })),
-    }));
-
     const me = await request(app)
-    .get('/users/me')
-    .set({
-      Authorization: `Bearer tokeninvalido`
-    })
-    
+      .get('/users/me')
+      .set({
+        Authorization: `Bearer tokeninvalido`,
+      });
+
     expect(me.body.errors[0]).toBe('TOKEN EXPIRADO.');
-  })
+  });
 });

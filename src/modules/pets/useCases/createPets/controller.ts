@@ -31,6 +31,7 @@ export class CreatePetsController extends BaseController {
         // roles: [],
         roles: [ROLES_TYPES.ROOT, ROLES_TYPES.MANAGER, ROLES_TYPES.USER],
       },
+      // validando os dados
       schema: {
         body: Joi.object({
           name: Joi.string().required(),

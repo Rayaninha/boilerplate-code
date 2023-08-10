@@ -61,6 +61,15 @@ describe('[CONTROLLER] - CREATE USERS', () => {
   });
 
   test('should create a new user and store all properties correctly in the database', async () => {
+
+    jest.mock('./command', () => ({
+      CreateUsersCommand: jest.fn().mockImplementation(() => ({
+        execute: async () => false,
+        isValid: () => true,
+        errors: ['TOKEN EXPIRADO'],
+      })),
+    }));
+    
     const userInDatabase = await request(app)
       .post('/users')
       .send({

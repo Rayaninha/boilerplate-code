@@ -28,6 +28,7 @@ class MongoDb {
   }
 }
 
+//collections
 export const collections = {
   admin: 'admin',
   configurations: 'configurations',
