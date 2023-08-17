@@ -1,6 +1,6 @@
 import { Application } from 'express';
 import '../../../../shared/infra/http/env';
-import { Db } from 'mongodb';
+import { Db, FindOperators } from 'mongodb';
 import { App } from '../../../../shared/infra/http/app';
 import MongoDb, {
   collections,
@@ -11,6 +11,7 @@ import { hash } from 'bcryptjs';
 describe('[CONTROLLER] - CREATE SESSIONS', () => {
   let app: Application;
   let db: Db;
+  let findOperators: FindOperators;
 
   beforeAll(async () => {
     app = await new App().setup();
@@ -67,4 +68,30 @@ describe('[CONTROLLER] - CREATE SESSIONS', () => {
     expect(auth.body.errors[0]).toBe('seus dados de entrada estão incorretos.');
     expect(auth.body.r).toBe(false);
   });
+
+  test('token expirado', async () => {
+    const auth = await request(app)
+      .post('/users/auth')
+      .send({
+        email: 'admin@example.com',
+        password: 'admin',
+      });
+
+    await db.collection(collections.users).updateOne(
+      {email: 'admin@example.com',},
+      {$set: {lastLogin: '2023-08-01T18:56:38.327Z'}},
+    );
+    
+    const updatedUser = await db.collection(collections.users).findOne({
+      email: 'admin@example.com',
+    });
+    
+    const me = await request(app)
+      .get('/users/me')
+      .set({
+        Authorization: `Bearer ${auth.body.token}`,
+      });
+
+    expect(me.body.errors[0]).toBe('TOKEN EXPIRADO.');
+  }); 
 });
