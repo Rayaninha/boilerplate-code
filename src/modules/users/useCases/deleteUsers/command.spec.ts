@@ -38,7 +38,7 @@ describe('[COMMAND] - DELETE USER', () => {
     await db.dropDatabase();
   });
 
-  test('delete user', async () => {
+  test('must be able to delete a user', async () => {
     jest.setTimeout(30000);
     const deleteUser = await deleteUserCommand.execute({ _id: userId });
 

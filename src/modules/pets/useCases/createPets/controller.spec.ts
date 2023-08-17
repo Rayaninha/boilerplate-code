@@ -36,7 +36,7 @@ describe('[CONTROLLER] - CREATE PETS', () => {
     await db.dropDatabase();
   });
 
-  test('deve ser possível criar um pet', async () => {
+  test('should ble able to create pets', async () => {
     const auth = await request(app)
       .post('/users/auth')
       .send({
@@ -62,7 +62,7 @@ describe('[CONTROLLER] - CREATE PETS', () => {
       expect(pet.type).toBe('application/json');
   })
 
-  test('nao deve ser possível criar um pet com os tipos errados nos campus', async () => {
+  test('should not be able to create pets with wrong types', async () => {
     const auth = await request(app)
       .post('/users/auth')
       .send({
@@ -85,7 +85,7 @@ describe('[CONTROLLER] - CREATE PETS', () => {
       expect(pet.type).toBe('application/json');
   })
 
-  test('nao deve ser possível criar um pet com o token invalido', async () => {
+  test('must not be able to create pets with an invalid token', async () => {
     const auth = await request(app)
       .post('/users/auth')
       .send({
@@ -108,7 +108,7 @@ describe('[CONTROLLER] - CREATE PETS', () => {
       expect(pet.type).toBe('application/json');
   })
 
-  test('o pet deve ser excluido quando o usuário dono for excluído', async () => {
+  test('the pet must be deleted after deleting the associated user', async () => {
     const auth = await request(app)
       .post('/users/auth')
       .send({

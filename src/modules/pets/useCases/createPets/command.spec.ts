@@ -35,7 +35,7 @@ describe('[COMMAND] - CREATE PETS', () => {
     await db.dropDatabase();
   });
 
-  test('criando pets', async () => {
+  test('should ble able to create pets', async () => {
     jest.setTimeout(30000);
     const result = await createPetsCommand.execute({
       name: 'pet',
@@ -49,7 +49,7 @@ describe('[COMMAND] - CREATE PETS', () => {
     expect(result).toHaveProperty('userId');
   });   
 
-  test('deve ser possível criar pets repetidos', async () => {
+  test('should ble able to create repeat pets', async () => {
     jest.setTimeout(30000);
     const result = await createPetsCommand.execute({
       name: 'pet',

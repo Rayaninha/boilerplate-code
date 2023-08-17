@@ -30,7 +30,7 @@ describe('[CONTROLLER] - DELETE USER', () => {
     await db.dropDatabase();
   });
 
-  test('should able delete user', async () => {
+  test('must be able to delete a user', async () => {
      const auth = await request(app)
       .post('/users/auth')
       .send({
@@ -48,7 +48,7 @@ describe('[CONTROLLER] - DELETE USER', () => {
     expect(me.body.r).toBe(true);
   });
 
-  test('erro ao deletar o usuário', async () => {
+  test('should not be able to delete a user', async () => {
     const errorToken = await request(app)
       .delete('/users/delete')
       .set({

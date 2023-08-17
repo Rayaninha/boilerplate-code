@@ -92,17 +92,17 @@ describe('[CONTROLLER] - CREATE USERS', () => {
     expect(notSameValue).not.toBe(userInDatabase.body.data.name);
   });
 
-  test('palavras proibidas', async () => {
+  test('should not be able to create a user with keywords', async () => {
     const notUser = await request(app)
     .post('/users')
     .send({
-      name: "insulto",
+      name: "keywords",
       email: "notuser@example.com",
       password: "password",
       role: "toor",
     })
     .expect(200);
 
-    expect(notUser.body.data.name).toMatch(/insulto/);
+    expect(notUser.body.data.name).toMatch(/keywords/);
   })
 });

@@ -69,7 +69,7 @@ describe('[CONTROLLER] - CREATE SESSIONS', () => {
     expect(auth.body.r).toBe(false);
   });
 
-  test('token expirado', async () => {
+  test('should not be able to start a session with expired token', async () => {
     const auth = await request(app)
       .post('/users/auth')
       .send({
