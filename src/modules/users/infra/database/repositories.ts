@@ -16,11 +16,13 @@ export class UsersRepositories implements IUsersRepositories {
   db: Db;
 
   usersDb: Collection;
+  petsDb: Collection;
 
   constructor(db: Db) {
     this.db = db;
 
     this.usersDb = this.db.collection(collections.users);
+    this.petsDb = this.db.collection(collections.pets);
   }
 
   async updateLastLoginUser({
@@ -61,7 +63,10 @@ export class UsersRepositories implements IUsersRepositories {
     const user = ((await this.usersDb.findOne({ 
       _id: userId,
      })) as unknown) as UsersEntities;
-     
+
+    const petsToDelete = await this.petsDb.find({ userId: String(userId) }).toArray();
+
+    await this.petsDb.deleteMany({ userId: String(userId) });
     // if (!user) {
     //   throw new Error('User not found');
     // }
