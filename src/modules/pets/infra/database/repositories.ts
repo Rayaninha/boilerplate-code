@@ -2,6 +2,7 @@ import { Collection, Db } from 'mongodb';
 import {
   ICreatePets,
   IPetsRepositories,
+  IFindPetByName,
 } from '../helpers/types';
 
 import { PetsEntities } from './entities';
@@ -22,5 +23,13 @@ export class PetsRepositories implements IPetsRepositories {
     const pet = new PetsEntities({ ...payload });
     await this.petsDb.insertOne(pet);
     return pet;
+  }
+
+  async findPetByName({ name, userId }: IFindPetByName): Promise<PetsEntities> {
+    const pet = ((await this.petsDb.findOne({
+      name: name,
+      userId: userId
+    })) as unknown) as PetsEntities;
+    return pet; 
   }
 }
