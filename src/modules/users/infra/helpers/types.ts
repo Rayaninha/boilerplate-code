@@ -2,6 +2,7 @@ import { IRolesTypes } from '../../../../shared/commons/BaseController';
 import { ObjectId } from 'mongodb';
 import { TokensEntities } from '../database/tokens/entities';
 import { UsersEntities } from '../database/entities';
+// import { PetsEntities } from 'modules/pets/infra/database/entities';
 
 export interface ICreateUsers {
   name: string;
@@ -60,6 +61,7 @@ export interface IUsersRepositories {
     payload: IFindUsersByEmail,
   ): Promise<UsersEntities | undefined>;
   findUserById({ userId }: IFindUserById): Promise<UsersEntities>;
+  getAllUsers({}: IGetAllUsers): Promise<UsersEntities>;
   updateLastLoginUser({ userId }: IUpdateLastLoginRequest): Promise<void>;
   deleteUserById({ userId }: IDeleteUserById): Promise<UsersEntities>;
 }
