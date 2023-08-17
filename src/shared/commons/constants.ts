@@ -26,6 +26,7 @@ export const ACTIONS_TYPES = {
 
   //PET
   NEW_PET_CREATED: 'NEW_PET_CREATED',
+  PET_GET: 'PET_GET'
 };
 
 export const ROLES_TYPES = {
