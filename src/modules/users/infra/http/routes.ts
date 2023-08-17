@@ -7,7 +7,7 @@ import { RefresnTokenController } from '../../useCases/refreshToken/controller';
 import { Router } from 'express';
 import { SchemaValidator } from '../../../../shared/infra/http/middlewares/schemaValidator';
 import { DeleteUsersController } from '../../useCases/deleteUsers/controller';
-// import { GetAllUsersController } from '../../useCases/getAll/controller';
+import { GetAllUsersController } from '../../useCases/getAll/controller';
 
 
 export class UsersRoutes {
@@ -19,7 +19,7 @@ export class UsersRoutes {
     const { handle: refreshToken } = new RefresnTokenController(db);
     const { handle: getMe } = new GetMeController(db);
     const { handle: deleteUsers } = new DeleteUsersController(db);
-    // const { handle: getAll } = new GetAllUsersController(db)
+    const { handle: getAll } = new GetAllUsersController(db)
 
     // localhost:3000/users/
     routes.post(
@@ -51,12 +51,12 @@ export class UsersRoutes {
       refreshToken.fn,
     );
 
-    // // localhost:3000/users/all
-    // routes.get(
-    //   '/all',
-    //   SchemaValidator(getAll.schema),
-    //   getAll.fn,
-    // );
+    // localhost:3000/users/all
+    routes.get(
+      '/all',
+      // SchemaValidator(getAll.schema),
+      getAll.fn,
+    );
 
     // localhost:3000/users/delete
     routes.delete(
